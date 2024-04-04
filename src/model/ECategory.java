@@ -9,7 +9,14 @@ public enum ECategory {
         this.id = id;
         this.name = name;
     }
-
+    public static ECategory finByStr(String str){
+        for (ECategory i : values()){
+            if(i.getName().equals(str)){
+                return i;
+            }
+        }
+        return null;
+    }
     public static ECategory findById(int id) {
         for (ECategory e : values()) {
             if (e.getId() == id) {

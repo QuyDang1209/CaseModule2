@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileUtils implements Serializable {
+    private static String filePath = "product.txt";
     private static Scanner scanner = new Scanner(System.in);
 
     public static void writeFile(List<Products> products) {
@@ -29,7 +30,8 @@ public class FileUtils implements Serializable {
     public static List<Products> readFile() {
         List<Products> products = new ArrayList<>();
         try {
-            FileReader fileReader = new FileReader("product.txt");
+
+            FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = null;
             while ((line = bufferedReader.readLine()) != null){
@@ -40,7 +42,7 @@ public class FileUtils implements Serializable {
                 p.setSize((items[2]));
                 p.setCost(Integer.parseInt(items[3]));
                 p.setQuanity(Integer.parseInt(items[4]));
-                p.setCategory(ECategory.findById(Integer.parseInt((items[5]))));
+                p.setCategory(ECategory.finByStr((items[5])));
                 products.add(p);
             }
         } catch (FileNotFoundException e) {
@@ -52,32 +54,8 @@ public class FileUtils implements Serializable {
 
     }
 
-    public static void addProduct(List<Products> products) {
-        System.out.print(" Nhập id");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.print(" Nhập tên sản phẩm");
-        String name = scanner.nextLine();
-        System.out.print(" Nhập size sản phẩm");
-        String size = scanner.nextLine();
-        System.out.print(" Nhập giá sản phẩm");
-        int cost = Integer.parseInt(scanner.nextLine());
-        System.out.print(" Nhập số lượng sản phẩm");
-        int quanity = Integer.parseInt(scanner.nextLine());
-        System.out.println(" Nhập danh mục");
-        for (ECategory eCategory : ECategory.values()) {
-            System.out.println(eCategory.getName() + " : " + eCategory.getId());
-        }
-        String  icategory = ((scanner.nextLine()));
-        ECategory category = ECategory.findById(Integer.parseInt(icategory));
-        products.add(new Products(id, name, size, cost, quanity, category));
 
-    }
 
-    public static void showListProduct(List<Products> products) {
-        System.out.printf("%5s | %10s | %15s | %10s | %10s | %10s \n", "ID", "Name", "SIZE", "COST", "QUANITY", "CATEGORY");
-        for (Products p : products) {
-            System.out.printf("%5s | %10s | %15s | %10s | %10s |%10s \n", p.getId(), p.getName(), p.getSize(), p.getCost(), p.getQuanity(), p.getCategory());
-        }
-    }
+
 
 }
