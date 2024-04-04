@@ -2,12 +2,21 @@ package model;
 
 public enum ECategory {
     MALE(1,"MALE"), FELMALE(2,"FELMALE"), CHILDREN(3,"CHILDREN");
-    private int id;
+    private  int id;
     private String name;
 
     private ECategory(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public static ECategory findById(int id) {
+        for (ECategory e : values()) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
     }
 
     public int getId() {

@@ -67,4 +67,9 @@ public class Products {
     public void setQuanity(int quanity) {
         this.quanity = quanity;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s,%s,%s,%s,%s,%s", this.id, this.name, this.size,this.cost,this.quanity,this.category);
+    }
 }
