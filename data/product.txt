@@ -1,3 +1,4 @@
 1,quần jean,28,300000,20,MALE
 2,áo polo,29,250000,13,MALE
 3,áo phông,30,200000,20,MALE
+4,váy,XL,350000,3,FELMALE

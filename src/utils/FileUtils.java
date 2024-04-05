@@ -9,11 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileUtils implements Serializable {
-    private static String filePath = "product.txt";
-    private static Scanner scanner = new Scanner(System.in);
+    private static String filePath = "./data/product.txt";
 
     public static void writeFile(List<Products> products) {
-        File file = new File("product.txt");
+        File file = new File(filePath);
 
         try {
             PrintWriter printWriter = new PrintWriter(file);

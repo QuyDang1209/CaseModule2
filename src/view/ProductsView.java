@@ -10,23 +10,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProductsView {
-    public static void addMenuProducts() {
+    public void addMenuProducts() {
         List<Products> product = FileUtils.readFile();
         if (product == null) {
             product = new ArrayList<>();
         }
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập tác vụ muốn chon");
-        System.out.println("1. Xem danh sách sản phẩm");
-        System.out.println("2. Nhập sản phẩm mới");
-        System.out.println("3. Sửa sản phẩm");
-        System.out.println("4. Xóa sản phẩm");
-        System.out.println("5. Tìm kiếm sản phẩm");
-        System.out.println("6. Lên đơn hàng");
-        System.out.println("0. Thoát");
-        int choose = scanner.nextInt();
+
         boolean check = true;
         while (check) {
+            System.out.println("Nhập tác vụ muốn chon");
+            System.out.println("1. Xem danh sách sản phẩm");
+            System.out.println("2. Nhập sản phẩm mới");
+            System.out.println("3. Sửa sản phẩm");
+            System.out.println("4. Xóa sản phẩm");
+            System.out.println("5. Tìm kiếm sản phẩm");
+            System.out.println("6. Lên đơn hàng");
+            System.out.println("0. Thoát");
+            Scanner scanner = new Scanner(System.in);
+            int choose = scanner.nextInt();
             switch (choose) {
                 case 1:
                     showListProduct(product);
@@ -52,12 +53,12 @@ public class ProductsView {
 
     }
 
-    private static void addNewProducts(List<Products> product) {
+    private void addNewProducts(List<Products> product) {
         addProduct(product);
         FileUtils.writeFile(product);
     }
 
-    public static void addProduct(List<Products> products) {
+    public void addProduct(List<Products> products) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(" Nhập id ");
         int id = Integer.parseInt(scanner.nextLine());
@@ -78,14 +79,14 @@ public class ProductsView {
         products.add(new Products(id, name, size, cost, quanity, category));
 
     }
-    public static void showListProduct(List<Products> products) {
+    public void showListProduct(List<Products> products) {
         System.out.printf("%5s | %10s | %15s | %10s | %10s | %10s \n", "ID", "Name", "SIZE", "COST", "QUANITY", "CATEGORY");
         for (Products p : products) {
             System.out.printf("%5s | %10s | %15s | %10s | %10s |%10s \n", p.getId(), p.getName(), p.getSize(), p.getCost(), p.getQuanity(), p.getCategory());
         }
 
     }
-    public static void changeProducts(List<Products> products){
+    public void changeProducts(List<Products> products){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập tên sản phẩm muốn sửa: ");
         String change = scanner.nextLine();
@@ -114,7 +115,7 @@ public class ProductsView {
             }
         }
     }
-    public static void deleteProducts(List<Products> products){
+    public  void deleteProducts(List<Products> products){
         System.out.println("Nhập sản phẩm muốn xóa");
         Scanner scanner = new Scanner(System.in);
         String delete = scanner.nextLine();
@@ -125,7 +126,7 @@ public class ProductsView {
             }
         }
     }
-    public static void findProducts(List<Products> products){
+    public  void findProducts(List<Products> products){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập sản phẩm muốn tìm");
         String find = scanner.nextLine();
