@@ -8,14 +8,16 @@ public class User {
     private String name;
     private String password;
     private LocalDate dob;
+    private String email;
     private EUser role;
     public User() {
     }
 
-    public User(String name, String password, LocalDate dob, EUser role) {
+    public User(String name, String password, LocalDate dob,String email, EUser role) {
         this.name = name;
         this.password = password;
         this.dob = dob;
+        this.email = email;
         this.role = role;
     }
 
@@ -51,8 +53,16 @@ public class User {
         this.role = role;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s",this.name,this.password, DateTimeUtil.formatDate(this.dob),(this.role) +"\n");
+        return String.format("%s,%s,%s,%s,%s",this.name,this.password, DateTimeUtil.formatDate(this.dob),this.email,(this.role) +"\n");
     }
 }

@@ -143,4 +143,45 @@ public class ProductsView {
             showListProduct(result);
         }
     }
+    public void addUserProduct() {
+        List<Products> product = FileUtils.readFile();
+        if (product == null) {
+            product = new ArrayList<>();
+        }
+
+        boolean check = true;
+        while (check) {
+            System.out.println("Nhập tác vụ muốn chon");
+            System.out.println("1. Xem danh sách sản phẩm");
+            System.out.println("2. Nhập sản phẩm mới");
+            System.out.println("3. Tìm kiếm sản phẩm");
+            System.out.println("4. Lên đơn hàng");
+            System.out.println("0. Thoát");
+            Scanner scanner = new Scanner(System.in);
+            int choose = scanner.nextInt();
+            switch (choose) {
+                case 1:
+                    showListProduct(product);
+                    break;
+                case 2:
+                    addNewProducts(product);
+                    break;
+                case 3:
+                    findProducts(product);
+                    break;
+                case 4:
+
+                    break;
+                case 0:
+                    check = false;
+                    break;
+            }
+        }
+
+
+    }
+    public void oderProduct(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println();
+    }
 }
