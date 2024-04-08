@@ -16,8 +16,8 @@ public class ProductsView {
             product = new ArrayList<>();
         }
 
-        boolean check = true;
-        while (check) {
+        boolean check2 = true;
+        while (check2) {
             System.out.println("Nhập tác vụ muốn chon");
             System.out.println("1. Xem danh sách sản phẩm");
             System.out.println("2. Nhập sản phẩm mới");
@@ -25,6 +25,7 @@ public class ProductsView {
             System.out.println("4. Xóa sản phẩm");
             System.out.println("5. Tìm kiếm sản phẩm");
             System.out.println("6. Lên đơn hàng");
+            System.out.println("7. Hiển thị tất cả các đơn hàng đã đặt");
             System.out.println("0. Thoát");
             Scanner scanner = new Scanner(System.in);
             int choose = scanner.nextInt();
@@ -44,8 +45,13 @@ public class ProductsView {
                 case 5:
                     findProducts(product);
                     break;
+                case 6:
+                    OderView.createOder();
+                    OderView.showOrdersbyname();
+                case 7:
+                    OderView.showOrders();
                 case 0:
-                    check = false;
+                    check2 = false;
                     break;
             }
         }
@@ -79,7 +85,7 @@ public class ProductsView {
         products.add(new Products(id, name, size, cost, quanity, category));
 
     }
-    public void showListProduct(List<Products> products) {
+    public static void showListProduct(List<Products> products) {
         System.out.printf("%5s | %10s | %15s | %10s | %10s | %10s \n", "ID", "Name", "SIZE", "COST", "QUANITY", "CATEGORY");
         for (Products p : products) {
             System.out.printf("%5s | %10s | %15s | %10s | %10s |%10s \n", p.getId(), p.getName(), p.getSize(), p.getCost(), p.getQuanity(), p.getCategory());
@@ -126,7 +132,7 @@ public class ProductsView {
             }
         }
     }
-    public  void findProducts(List<Products> products){
+    public static   void findProducts(List<Products> products){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập sản phẩm muốn tìm");
         String find = scanner.nextLine();
@@ -149,8 +155,8 @@ public class ProductsView {
             product = new ArrayList<>();
         }
 
-        boolean check = true;
-        while (check) {
+        boolean check1 = true;
+        while (check1) {
             System.out.println("Nhập tác vụ muốn chon");
             System.out.println("1. Xem danh sách sản phẩm");
             System.out.println("2. Nhập sản phẩm mới");
@@ -170,18 +176,16 @@ public class ProductsView {
                     findProducts(product);
                     break;
                 case 4:
-
+                    OderView.createOder();
+                    OderView.showOrdersbyname();
                     break;
                 case 0:
-                    check = false;
+                    check1 = false;
                     break;
             }
         }
 
 
     }
-    public void oderProduct(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println();
-    }
+
 }

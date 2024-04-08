@@ -1,10 +1,17 @@
 package test;
 
+import model.Oder;
+import view.OderView;
 import view.UsersView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class test {
     public static void main(String[] args) {
-        UsersView u = new UsersView();
-        u.menuUser();
+        OderView o = new OderView();
+
+        o.createOder();
+        o.showOrders();
     }
 }

@@ -5,6 +5,7 @@ import model.EUser;
 import model.Products;
 import model.User;
 import utils.DateTimeUtil;
+import utils.ValidateUtil;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ public class UsersView {
     private static final String filePath = "./data/users.txt";
 //    private List<User> users =new ArrayList<>();
 
-    public void writeFile(List<User> users) {
+    public static void writeFile(List<User> users) {
         File file = new File(filePath);
 
         try {
@@ -31,7 +32,7 @@ public class UsersView {
         }
     }
 
-    public List<User> readFile() {
+    public static List<User> readFile() {
         List<User> users = new ArrayList<>();
 
         try {
@@ -57,31 +58,46 @@ public class UsersView {
         return users;
     }
 
-    public void addUser(List<User> users) {
+    public static void addUser(List<User> users) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập tên đăng ký");
-        String name = scanner.nextLine();
-        System.out.println("Nhập password đăng ký");
-        String password = scanner.nextLine();
+        String name = checkInputValid(ValidateUtil.FIELD_NAME, ValidateUtil.FIELD_NAME_MESSAGE, ValidateUtil.REGEX_USERNAME );
+        System.out.println("Nhập password");
+        String pass = scanner.nextLine();
         System.out.println("Nhập ngày tháng năm sinh");
         LocalDate dob = DateTimeUtil.parse(scanner.nextLine());
-        System.out.println("Nhập địa chỉ email");
-        String email = scanner.nextLine();
+
+        String email = checkInputValid(ValidateUtil.FIELD_EMAIL,ValidateUtil.FIELD_EMAIL_MESSAGE,ValidateUtil.REGEX_EMAIL);
         System.out.println("Nhập tên đăng kí");
         for (EUser e : EUser.values()) {
             System.out.println(e);
         }
         EUser role = EUser.findEUserbyStr(scanner.nextLine());
-        users.add(new User(name, password, dob, email, role));
+        users.add(new User(name, pass, dob, email, role));
+    }
+    private static String checkInputValid(String fieldName, String fieldMessage, String fieldPattern){
+        Scanner scanner = new Scanner(System.in);
+        String input = null;
+        boolean validateInput = false;
+        do {
+            System.out.printf("Nhập %s: \n", fieldName);
+            input = scanner.nextLine();
+            if (!ValidateUtil.isValid(fieldPattern, input)) {         // Nếu SAI
+                System.out.println(fieldMessage);
+                validateInput = true;
+            } else {
+                validateInput = false;
+            }
+        } while (validateInput);
+        return input;
     }
 
-    public void addNewUser(List<User> users) {
+    public static void addNewUser(List<User> users) {
         addUser(users);
         writeFile(users);
     }
 
-    public void logginAccount(List<User> users) {
+    public static void logginAccount(List<User> users) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập tên tài khoản");
@@ -113,7 +129,7 @@ public class UsersView {
 
     }
 
-    public void menuUser() {
+    public static void menuUser() {
         UsersView usersView = new UsersView();
         List<User> users = usersView.readFile();
         Scanner scanner = new Scanner(System.in);
